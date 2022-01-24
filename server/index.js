@@ -1,8 +1,8 @@
  const express = require("express");
 
-const{connect}= require("./app/config/database");
+// const{connect}= require("./app/config/database");
 
-connect();
+// connect();
 
 const app= express();
 const PORT=3000;
