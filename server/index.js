@@ -1,21 +1,26 @@
-const { use } = require("bcrypt/promises");
+//express
 const express = require("express");
-const res = require("express/lib/response");
-const cors=require("cors");
-const logger=require("morgan")
-// const{connect}= require("./app/config/database");
-// connect();
-const PORT=3000;
-const app= express();
-const HTTPSTATUSCODE= require ("./app/utils/httpStatusCode");   
-
+//morgan
+const logger=require("morgan");
+//basededatos
+const{connect}= require("./app/config/database");
 //routes .
+const home=require("./app/api/routes/home.routes");
 const user=require("./app/api/routes/user.routes");
 const character=require("./app/api/routes/character.routes");
 const location=require("./app/api/routes/location.routes");
-const home=require("./app/api/routes/home.routes");
+//error
+const HTTPSTATUSCODE= require ("./app/utils/httpStatusCode");   
+//cors
+const cors=require("cors");
+//bcrypt
+const { use } = require("bcrypt/promises");
+// const res = require("express/lib/response");
+const PORT=3000;
+const app= express();
 const { json } = require("express/lib/response");
 
+// connect();
 //headers
 app.use((req,res,next)=>{
     res.header('Access-Control-Alow-Methods','GET,PUT,POST,DELETE');
@@ -35,10 +40,10 @@ app.use(express.urlencoded({extended: true}));
 app.use(logger("dev"));
 
 
-app.use("/", home);
-app.use("/user", user);
-app.use("/character", character);
-app.use("/location", location);
+// app.use("/", home);
+// app.use("/user", user);
+// app.use("/character", character);
+// app.use("/location", location);
 
 //control de errores
 app.use((req,res,next)=>{
