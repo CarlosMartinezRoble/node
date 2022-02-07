@@ -15,19 +15,20 @@ const HTTPSTATUSCODE= require ("./app/utils/httpStatusCode");
 const cors=require("cors");
 //bcrypt
 const { use } = require("bcrypt/promises");
-// const res = require("express/lib/response");
+const res = require("express/lib/response");
 const PORT=3000;
 const app= express();
 const { json } = require("express/lib/response");
 
-// connect();
+connect();
 //headers
-app.use((req,res,next)=>{
+app.use((_req,res,next)=>{
     res.header('Access-Control-Alow-Methods','GET,PUT,POST,DELETE');
     res.header('Access-Control-Alow-Credentials',true);
     res.header('Access-Control-Alow-Header',"Content-Type");
     next();
-})
+ 
+});
  
 app.use(cors({
     origin:[`http://localhost:3000`,`http://localhost:4000`],
@@ -35,25 +36,24 @@ app.use(cors({
     })
 );
 app.use(express.json());  
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({extended: false}));
 
 app.use(logger("dev"));
 
-
-// app.use("/", home);
-// app.use("/user", user);
-// app.use("/character", character);
-// app.use("/location", location);
+app.use("/", home);
+app.use("/user", user);
+app.use("/character", character);
+app.use("/location", location);
 
 //control de errores
-app.use((req,res,next)=>{
+app.use((_req,_res,next)=>{
     let err= new Error;
     err.status = 404;
     err.message= HTTPSTATUSCODE[404];
     next(err);
 });
 app.use((err, req,res,next)=>{
-    return res.status(err.status||500),json(err.message||"unexpected error");
+    return res.status(err.status||500).json(err.message||"unexpected error");
 });
 
 // ocultar node.js
@@ -65,4 +65,4 @@ app.listen(PORT, () => {
 
 
 
-//video 28:07 del segundo video de antonio
+//video 52:08 del segundo video de antonio
