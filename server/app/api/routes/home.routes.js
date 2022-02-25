@@ -1,8 +1,6 @@
-const mongoose=require("mongoose");
-const Schema=mongoose.Schema;
-const HomeSchema= new Schema({
-},{
-  timestamps:true
-});
-const Home=mongoose.model("home", HomeSchema);
-module.exports= Home;
+const express = require("express");
+//Guardamos la función de express.Router() en una variable llamada router
+const router = express.Router();
+
+router.get("/");
+module.exports = router;

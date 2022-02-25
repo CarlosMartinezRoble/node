@@ -6,10 +6,10 @@ const logger=require("morgan");
 const{connect}= require("./app/config/database");
 //routes .
 const home=require("./app/api/routes/home.routes");
-const user=require("./app/api/routes/user.routes");
+// const user=require("./app/api/routes/user.routes");
 const character=require("./app/api/routes/character.routes");
 const location=require("./app/api/routes/location.routes");
-//error
+// //error
 const HTTPSTATUSCODE= require ("./app/utils/httpStatusCode");   
 //cors
 const cors=require("cors");
@@ -19,7 +19,8 @@ const res = require("express/lib/response");
 const PORT=3000;
 const app= express();
 const { json } = require("express/lib/response");
-
+const dotenv=require("dotenv");
+dotenv.config();
 connect();
 //headers
 app.use((_req,res,next)=>{
@@ -41,7 +42,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(logger("dev"));
 
 app.use("/", home);
-app.use("/user", user);
+// app.use("/user", user);
 app.use("/character", character);
 app.use("/location", location);
 
@@ -65,4 +66,4 @@ app.listen(PORT, () => {
 
 
 
-//video 52:08 del segundo video de antonio
+//video 1<22:28 
